@@ -7,6 +7,10 @@ export const MainView = () => {
     {
       id: 1,
       Title: "The Godfather",
+      Genre: {
+        Name: "Crime",
+        Description: "Crime film is a film genre inspired by and analogous to the crime fiction literary genre. Films of this genre generally involve various aspects of crime and its detection."
+      },
       Description: "Michael, the young and idealistic son of Vito Corleone, the head of the most powerful Mafia clan in Ner York, returns home as a war hero and is determined to live his own life. But tragic circumstances make him face the legacy of his family.",
       Director: {
         Name: "Francis Ford Coppola",
