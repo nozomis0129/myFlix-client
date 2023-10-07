@@ -1,13 +1,13 @@
 import { createRoot } from "react-dom/client";
 import { MainView } from "./components/main-view/main-view";
-import"./index.scss";
+import Container from "react-bootstrap/Container";
+import "./index.scss"
 
 const MyFlixApplication = () => {
   return (
-    <div className="my-flix">
-      <div>welcome to MyFlix!</div>
+    <Container className="my-flix">
       <MainView />
-    </div>
+    </Container>
   );
 };
 
