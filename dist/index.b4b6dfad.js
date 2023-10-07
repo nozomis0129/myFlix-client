@@ -9049,9 +9049,8 @@ ${frame.code}`;
                 stringValue = node.getAttribute(attributeName);
               }
               if (shouldRemoveAttribute(name, expected, propertyInfo, false))
-                return stringValue === null
-                  ? expected
-                  : stringValue; // eslint-disable-next-line react-internal/safe-string-coercion
+                return stringValue === null ? expected : stringValue;
+              // eslint-disable-next-line react-internal/safe-string-coercion
               else if (stringValue === "" + expected) return expected;
               else return stringValue;
             }
@@ -32504,9 +32503,8 @@ ${frame.code}`;
               // hook updates, which are handled differently and don't reach this
               // function), but there are some internal React features that use this as
               // an implementation detail, like selective hydration.
-              warnAboutRenderPhaseUpdatesInDEV(
-                fiber
-              ); // Track lanes that were updated during the render phase
+              warnAboutRenderPhaseUpdatesInDEV(fiber);
+            // Track lanes that were updated during the render phase
             else {
               if (isDevToolsPresent) addFiberToLanesMap(root, fiber, lane);
               warnIfUpdatesNotWrappedWithActDEV(fiber);
@@ -57875,7 +57873,8 @@ object-assign
         // React's built version is broken: https://github.com/facebook/react/issues/4251
         // for cases when the trigger is disabled and mouseOut/Over can cause flicker
         // moving from one child element to another.
-        function handleMouseOverOut(handler, args, relatedNative) { // eslint-disable-next-line @typescript-eslint/no-shadow
+        function handleMouseOverOut(handler, args, relatedNative) {
+          // eslint-disable-next-line @typescript-eslint/no-shadow
           const [e] = args;
           const target = e.currentTarget;
           const related = e.relatedTarget || e.nativeEvent[relatedNative];
