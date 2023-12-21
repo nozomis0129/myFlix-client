@@ -40313,11 +40313,7 @@ const OverlayTrigger = ({ trigger = [
 };
 exports.default = OverlayTrigger;
 
-<<<<<<< Updated upstream
 },{"dom-helpers/contains":"KpRFS","prop-types":"7wKI2","react":"21dqq","@restart/hooks/useTimeout":"63wsP","warning":"eUVzU","uncontrollable":"b3yWY","@restart/hooks/useMergedRefs":"6hhuo","./Overlay":"bHdwO","./safeFindDOMNode":"XsXw9","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"9RRzZ"}],"i0zxH":[function(require,module,exports) {
-=======
-},{"dom-helpers/contains":"KpRFS","react":"21dqq","@restart/hooks/useTimeout":"63wsP","warning":"eUVzU","uncontrollable":"b3yWY","@restart/hooks/useMergedRefs":"6hhuo","./Overlay":"bHdwO","./safeFindDOMNode":"XsXw9","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"9RRzZ","prop-types":"7wKI2"}],"i0zxH":[function(require,module,exports) {
->>>>>>> Stashed changes
 /* eslint-disable react/no-multi-comp */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "First", ()=>First);
