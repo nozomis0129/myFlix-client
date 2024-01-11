@@ -1,6 +1,10 @@
 import { Row, Col, Button } from "react-bootstrap";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((m) => m.id === movieId);
   return (
     <>
       <Row className="mb-5">
@@ -52,7 +56,9 @@ export const MovieView = ({ movie, onBackClick }) => {
             <span>{movie.featured}</span>
           </div>
           <div className="d-flex justify-content-center">
-            <Button href="/movies" onClick={onBackClick} variant="primary">Back</Button>
+            <Link to={`/`}>
+              <button className="back-button">Back</button>
+            </Link>
           </div>  
         </Col>
       </Row>
