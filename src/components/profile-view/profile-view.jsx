@@ -7,8 +7,7 @@ export const ProfileView = ({ user, token, setUser }) => {
   const [password, setPassword] = useState(user.Password)
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState(user.Birthday);
-  const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem("token");
+  //const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
 // Update user profile
@@ -34,8 +33,8 @@ export const ProfileView = ({ user, token, setUser }) => {
     }).then(async (response) => {
       console.log(response)
       if (response.ok) {
-        const updateUser = await response.json();
-        localStorage.setItem("user", JSON.stringify(updateUser));
+        const updatedUser = await response.json();
+        localStorage.setItem("user", JSON.stringify(updatedUser));
         setUser(updatedUser);
         alert("Updated");
       } else {
@@ -63,10 +62,6 @@ export const ProfileView = ({ user, token, setUser }) => {
         alert("Something went wrong");
       }
     })
-  }
-
-  if (loading) {
-    return <p>Loading...</p>;
   }
 
   // Display user information once loaded
