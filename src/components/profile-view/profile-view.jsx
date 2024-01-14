@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
@@ -8,6 +8,12 @@ export const ProfileView = ({ user, token, setUser }) => {
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState(user.Birthday);
   const navigate = useNavigate();
+  const [newUserData, setNewUserData] = useState({
+    newUsername: "",
+    newPassword: "",
+    newEmail: "",
+    newBirthday: ""
+  });
 
 // Update user profile
   const handleUpdate = (event) => {
@@ -38,6 +44,12 @@ export const ProfileView = ({ user, token, setUser }) => {
         const updatedUser = await response.json();
         localStorage.setItem("user", JSON.stringify(updatedUser));
         setUser(updatedUser);
+        setNewUserData({
+          newUsername: "",
+          newPassword: "",
+          newEmail: "",
+          newBirthday: ""
+        });
         alert("Updated");
         window.location.reload();
       } else {
@@ -72,13 +84,20 @@ export const ProfileView = ({ user, token, setUser }) => {
     <Container>
       <Row className="justify-centent-center">
         <Col md={6}>
-          <h2 className="profile-title">Update info</h2>
+          <h2 className="current-profile">User profile</h2>
+          <div>
+            <p>Username: {user.username}</p>
+            <p>Password: {user.password}</p>
+            <p>Email: {user.email}</p>
+            <p>Birthday: {user.birthday}</p>
+          </div>
+          <h2 className="profile-title">Update information</h2>
           <Form className="my-profile" onSubmit={handleUpdate}>
           <Form.Group className="mb-2" controlId="formUsername">
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
-              value={username}
+              value={newUserData.newUsername}
               onChange={(e) => setUsername(e.target.value)}
               required
               minLength="3"
@@ -88,7 +107,7 @@ export const ProfileView = ({ user, token, setUser }) => {
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
-              value={password}
+              value={newUserData.newPassword}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -97,7 +116,7 @@ export const ProfileView = ({ user, token, setUser }) => {
             <Form.Label>Email:</Form.Label>
             <Form.Control
               type="email"
-              value={email}
+              value={newUserData.newEmail}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -106,7 +125,7 @@ export const ProfileView = ({ user, token, setUser }) => {
             <Form.Label>Birthday:</Form.Label>
             <Form.Control
               type="date"
-              value={birthday}
+              value={newUserData.newBirthday}
               onChange={(e) => setBirthday(e.target.value)}
               required
             />
