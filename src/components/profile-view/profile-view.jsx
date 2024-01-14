@@ -7,7 +7,6 @@ export const ProfileView = ({ user, token, setUser }) => {
   const [password, setPassword] = useState(user.Password)
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState(user.Birthday);
-  //const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
 // Update user profile
@@ -23,6 +22,9 @@ export const ProfileView = ({ user, token, setUser }) => {
       Birthday: birthday
     };
 
+    console.log(JSON.stringify(data));
+    console.log(username);
+
     fetch(`https://movies-flix-app-bb16fed0a4c0.herokuapp.com/users/${user.Username}`, {
       method: "PUT",
       body: JSON.stringify(data),
@@ -37,6 +39,7 @@ export const ProfileView = ({ user, token, setUser }) => {
         localStorage.setItem("user", JSON.stringify(updatedUser));
         setUser(updatedUser);
         alert("Updated");
+        window.location.reload();
       } else {
         alert("Update failed");
       }
@@ -68,10 +71,10 @@ export const ProfileView = ({ user, token, setUser }) => {
   return (
     <Container>
       <Row className="justify-centent-center">
-        <Col>
+        <Col md={6}>
           <h2 className="profile-title">Update info</h2>
           <Form className="my-profile" onSubmit={handleUpdate}>
-          <Form.Group className="" controlId="formName">
+          <Form.Group className="mb-2" controlId="formUsername">
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
@@ -81,7 +84,7 @@ export const ProfileView = ({ user, token, setUser }) => {
               minLength="3"
             />
           </Form.Group>
-          <Form.Group controlId="formPassword">
+          <Form.Group className="mb-2" controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
@@ -90,7 +93,7 @@ export const ProfileView = ({ user, token, setUser }) => {
               required
             />
           </Form.Group>
-          <Form.Group controlId="formEmail">
+          <Form.Group className="mb-2" controlId="formEmail">
             <Form.Label>Email:</Form.Label>
             <Form.Control
               type="email"
