@@ -11,9 +11,11 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-  const [user, setUser] = useState(storedUser? storedUser : null);
+  
+  const [user, setUser] = useState(storedUser? parseUser : null);
   const [token, setToken] =useState(storedToken? storedToken : null);
   const [movies, setMovies] = useState([]);
+
 
   useEffect(() => {
     if (!token) {
@@ -21,7 +23,10 @@ export const MainView = () => {
     }
     
     fetch("https://movies-flix-app-bb16fed0a4c0.herokuapp.com/movies", {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: {
+        "Content-Type": "application/json", 
+        Authorization: `Bearer ${token}`
+      }
     })
       .then ((response) => response.json())
       .then ((data) => {
