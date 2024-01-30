@@ -1,20 +1,24 @@
 import { useState } from "react";
+import "./profile-view.scss";
+import { MovieCard } from "../movie-card/movie-card";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, FormGroup } from "react-bootstrap";
+import moment from "moment";
 
-export const ProfileView = ({ user, setUser }) => {
+export const ProfileView = ({ user, movies, setUser, addFavoriteMovie,removeFavoriteMovie }) => {
   const [username, setUsername] = useState(user.Usermane);
   const [password, setPassword] = useState(user.Password)
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState(user.Birthday);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const favoriteMovieList = movies.filter(movie => user.FavoriteMovies.includes(movie.id));
 
 // Update user profile
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    //const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const data = {
       Username: username,
@@ -72,14 +76,35 @@ export const ProfileView = ({ user, setUser }) => {
   // Display user information once loaded
   return (
     <Container>
-      <Row className="justify-centent-center">
+      <Row>
+        <h2 className="profile-title text-center">Favorite Movies</h2>
+        <Row className="justify-content-center">
+          { 
+            favoriteMovieList?.length !== 0 ?
+            favoriteMovieList?.map((movie) => (
+              
+              <Col xs={12} md={5} lg={3} xl={2} key={movie.id} className="mx-2 mt-2 mb-5">
+                  <MovieCard 
+                    movie={movie}
+                    isFavorite={user.FavoriteMovies.includes(movie.id)}
+                    addFavoriteMovie={addFavoriteMovie}
+                    removeFavoriteMovie={removeFavoriteMovie}
+                  />
+              </Col> 
+            )):<Col><p>There are no favorite movies</p></Col>  
+          }
+        </Row>
+      </Row>
+      <Row className="prof-form">
         <Col md={6}>
-          <h2 className="current-profile">User profile</h2>
+          <h2 className="current-profile">My profile</h2>
           <div>
             <p>Username: {user.Username}</p>
             <p>Email: {user.Email}</p>
-            <p>Birthday: {user.Birthday}</p>
+            <p>Birthday: {moment(user.Birthday).utc().format("YYYY-MM-DD")}</p>
           </div>
+        </Col>
+        <Col>  
           <h2 className="profile-title">Update information</h2>
           <Form className="my-profile" onSubmit={handleUpdate}>
           <Form.Group className="mb-2" controlId="formUsername">
@@ -119,8 +144,10 @@ export const ProfileView = ({ user, setUser }) => {
               required
             />
           </Form.Group>
-          <Button className="update" type="submit" onClick={handleUpdate}>Update</Button>
-          <Button className="delete" onClick={handleDelete}>Delete Account</Button>
+          <FormGroup className="d-flex justify-content-between mt-3">
+            <Button className="update" type="submit" onClick={handleUpdate}>Update</Button>
+            <Button className="delete-btn" onClick={handleDelete}>Delete Account</Button>
+          </FormGroup>
         </Form>
         </Col>
       </Row>

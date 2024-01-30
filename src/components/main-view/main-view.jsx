@@ -22,7 +22,7 @@ export const MainView = () => {
       return;
     }
     
-    fetch("https://movies-flix-app-bb16fed0a4c0.herokuapp.com/movies", {
+    fetch(`https://movies-flix-app-bb16fed0a4c0.herokuapp.com/movies`, {
       headers: {
         "Content-Type": "application/json", 
         Authorization: `Bearer ${token}`
@@ -55,6 +55,56 @@ export const MainView = () => {
         setMovies(moviesFromApi);
       });
   }, [token]);
+
+  const addFavoriteMovie = (id) => {
+    fetch(
+      `https://movies-flix-app-bb16fed0a4c0.herokuapp.com/users/${user.Username}/movies/${id}`,
+      { method: "POST", headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.log("Failed to add fav movie");
+        }
+      })
+      .then((user) => {
+        if (user) {
+          alert("successfully added to favorites");
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+          //setIsFavorite(true);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
+
+  const removeFavoriteMovie = (id) => {
+    fetch(
+      `https://movies-flix-app-bb16fed0a4c0.herokuapp.com/users/${user.Username}/movies/${id}`,
+      { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          alert("Failed");
+        }
+      })
+      .then((user) => {
+        if (user) {
+          alert("successfully deleted from favorites");
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+          //setIsFavorite(false);
+        }
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   return (
     <BrowserRouter>
@@ -110,7 +160,11 @@ export const MainView = () => {
                     <Col>The list is empty!</Col>
                   ) : (
                     <Col md={8}>
-                      <MovieView movies={movies} />
+                      <MovieView 
+                        movies={movies}
+                        removeFavoriteMovie={removeFavoriteMovie}
+                        addFavoriteMovie={addFavoriteMovie}
+                       />
                     </Col>
                   )}
               </>
@@ -126,9 +180,14 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie) => (
-                      <Col className="mb-5" key={movie.id} md={3}>
-                        <MovieCard movie={movie} />
+                    {movies.map((movie, movieId) => (
+                      <Col className="mb-5" key={movieId} md={3}>
+                        <MovieCard
+                          movie={movie}
+                          removeFavoriteMovie={removeFavoriteMovie}
+                          addFavoriteMovie={addFavoriteMovie}
+                          isFavorite={user.FavoriteMovies.includes(movie.id)}
+                        />
                       </Col>
                     ))}
                   </>
@@ -148,7 +207,9 @@ export const MainView = () => {
                         user={user}
                         token={token}
                         setUser={setUser}
-
+                        movies={movies}
+                        addFavoriteMovie={addFavoriteMovie}
+                        removeFavoriteMovie={removeFavoriteMovie}
                       />
                   </Col>
                 )}
