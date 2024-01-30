@@ -83,7 +83,7 @@ export const ProfileView = ({ user, movies, setUser, addFavoriteMovie,removeFavo
             favoriteMovieList?.length !== 0 ?
             favoriteMovieList?.map((movie) => (
               
-              <Col xs={12} md={5} lg={3} xl={2} key={movie.id} className="mx-2 mt-2 mb-5">
+              <Col md={6} lg={3} key={movie.id} className="mx-2 mt-2 mb-5">
                   <MovieCard 
                     movie={movie}
                     isFavorite={user.FavoriteMovies.includes(movie.id)}
