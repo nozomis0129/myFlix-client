@@ -70,10 +70,9 @@ export const MainView = () => {
       })
       .then((user) => {
         if (user) {
-          alert("successfully added to favorites");
+          alert("added to favorit movies");
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
-          //setIsFavorite(true);
         }
       })
       .catch((error) => {
@@ -95,10 +94,9 @@ export const MainView = () => {
       })
       .then((user) => {
         if (user) {
-          alert("successfully deleted from favorites");
+          alert("removed from favorit movies");
           localStorage.setItem("user", JSON.stringify(user));
           setUser(user);
-          //setIsFavorite(false);
         }
       })
       .catch((error) => {
@@ -181,7 +179,7 @@ export const MainView = () => {
                 ) : (
                   <>
                     {movies.map((movie, movieId) => (
-                      <Col className="mb-5" key={movieId} md={3}>
+                      <Col className="mb-5" key={movieId} md={6} lg={3}>
                         <MovieCard
                           movie={movie}
                           removeFavoriteMovie={removeFavoriteMovie}
