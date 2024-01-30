@@ -1,6 +1,20 @@
+.fav-button {
+  color: #ff90bc;
+  cursor: pointer;
+}
 
+.delete-btn {
+  background-color: #ff8551 !important;
+  border-color: #ff8551 !important;
+}
 
+.prof-form {
+  padding-bottom: 40px;
+}
 
+.update-form {
+  padding-top: 40px;
+}
 
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
@@ -5780,8 +5794,7 @@ textarea.form-control-lg {
   position: fixed;
   top: 0;
   left: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
 }
 
 .modal-dialog {
