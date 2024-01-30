@@ -1,10 +1,20 @@
 import PropTypes from "prop-types";
+import "./movie-card.scss";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { Heart, HeartFill } from "react-bootstrap-icons";
 
-export const MovieCard = ({ movie }) => {
+export const MovieCard = ({ movie, addFavoriteMovie, removeFavoriteMovie, isFavorite }) => {
+
   return (
     <Card className="h-100">
+       <div>
+          {isFavorite ? (
+            <HeartFill size={30} className="fav-button mt-2 me-2 top-0 end-0" onClick={() => removeFavoriteMovie(movie.id)}/>
+          ) : (
+            <Heart size={30} className="fav-button mt-2 me-2 top-0 end-0" onClick={() => addFavoriteMovie(movie.id)}/>
+          )}
+        </div>
       <Card.Img variant="top" src={movie.image} />
       <Card.Body className="justify-content-center">
         <Card.Title>{movie.title}</Card.Title>
