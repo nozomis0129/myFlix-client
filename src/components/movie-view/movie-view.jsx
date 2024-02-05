@@ -1,58 +1,45 @@
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+//import { MovieCard } from "../movie-card/movie-card";
+import moment from "moment";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies, removeFavoriteMovie, addFavoriteMovie }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((movie) => movie.id === movieId);
+  const user = JSON.parse(localStorage.getItem("user"));
+  //const FavoriteMovies = {user.FavoriteMovies};
+  
   return (
     <>
-      <Row className="mb-5">
+      <Row className="justify-content-center">
+        <Col xs="auto">
+            <img src={movie.image} />
+        </Col>
+      </Row>
+      <Row className="mb-4">
         <Col className="w-100" md={8}>
+          <Card.Body className="mb-3">
+            <Card.Title>{movie.title}</Card.Title>
+            <Card.Text>{movie.description}</Card.Text>
+            <Card.Title>Genre: {movie.genre.name}</Card.Title>
+            <Card.Text>{movie.genre.description}</Card.Text>
+            <Card.Title>Director: {movie.director.name}</Card.Title>
+            <Card.Text>{movie.director.bio}</Card.Text>
+            <Card.Title>Release Year: {moment(movie.release).utc().format("YYYY")}</Card.Title>
+          </Card.Body>
+        
           <div>
-            <img src={movie.image} className="w-100" />
-          </div>
-          <div>
-            <span>Title: </span>
-            <span>{movie.title}</span>
-          </div>
-          <div>
-            <span>Description: </span>
-            <span>{movie.description}</span>
-          </div>
-          <div>
-            <span>Genre: </span>
-            <span>{movie.genre.name}</span>
-            <div>({movie.genre.description})</div>
-          </div>
-          <div>
-            <div>
-              <span>Director: </span>
-              <span>{movie.director.name}</span>
-            </div>
-            <div>
-              <span>Bio: </span>
-              <span>{movie.director.bio}</span>
-            </div>
-            <div>
-              <span>Birth Year: </span>
-              <span>{movie.director.birth}</span>
-            </div>
-            <div>
-              <span>Death Year: </span>
-              <span>{movie.director.death}</span>
-            </div>
-          </div>
-          <div>
-            <span>Actors: </span>
-            <span>{movie.actors}</span>
-          </div>
-          <div>
-            <span>Release Year: </span>
-            <span>{movie.release}</span>
-          </div>
-          <div>
-            <span>Featured: </span>
-            <span>{movie.featured}</span>
+          {user.FavoriteMovies.includes(movie.id) ? (
+            <Button className="fav-btn" onClick={() =>removeFavoriteMovie(movie.id)}>remove</Button>
+          ) : (
+            <Button className="fav-btn" onClick={() => addFavoriteMovie(movie.id)}>Favorite</Button>
+          )}
           </div>
           <div className="d-flex justify-content-center">
-            <Button href="/movies" onClick={onBackClick} variant="primary">Back</Button>
+            <Link to={`/`}>
+              <Button className="back-button">Back</Button>
+            </Link>
           </div>  
         </Col>
       </Row>
