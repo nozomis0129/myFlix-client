@@ -5,7 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 import { ProfileView } from "../profile-view/profile-view";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
@@ -15,6 +15,9 @@ export const MainView = () => {
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] =useState(storedToken? storedToken : null);
   const [movies, setMovies] = useState([]);
+
+  const [search, setSearch] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
 
 
   useEffect(() => {
@@ -178,8 +181,21 @@ export const MainView = () => {
                   <Col>The list is empty!</Col>
                 ) : (
                   <>
-                    {movies.map((movie, movieId) => (
-                      <Col className="mb-5" key={movieId} md={6} lg={3}>
+                    <Form className="justify-content-center mb-4">
+                      <Form.Select onChange={(e) => setSelectedGenre(e.target.value)} aria-label="Default genre">
+                        <option value="" selected>Filter by genre</option>
+                        <option value="Drama">Drama</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Romance">Romance</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Science Fiction">Science Fiction</option>
+                      </Form.Select>
+                    </Form>
+                    {movies.filter((movie) => {
+                      return selectedGenre === "" ? movie : movie.genre.name === selectedGenre;
+                    })
+                    .map((movie, movieId) => (
+                      <Col className="mx-2 mt-2 mb-5" key={movieId} md={6} lg={3}>
                         <MovieCard
                           movie={movie}
                           removeFavoriteMovie={removeFavoriteMovie}
