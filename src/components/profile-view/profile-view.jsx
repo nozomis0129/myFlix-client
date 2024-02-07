@@ -2,8 +2,9 @@ import { useState } from "react";
 import "./profile-view.scss";
 import { MovieCard } from "../movie-card/movie-card";
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col, Form, Button, FormGroup } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, FormGroup, Card, ListGroup } from "react-bootstrap";
 import moment from "moment";
+import { PersonCircle, Envelope, Calendar } from "react-bootstrap-icons";
 
 export const ProfileView = ({ user, movies, setUser, addFavoriteMovie,removeFavoriteMovie }) => {
   const [username, setUsername] = useState(user.Usermane);
@@ -77,7 +78,7 @@ export const ProfileView = ({ user, movies, setUser, addFavoriteMovie,removeFavo
   return (
     <Container>
       <Row>
-        <h2 className="profile-title text-center">Favorite Movies</h2>
+        <h2 className="profile-title text-center my-5">Favorite Movies</h2>
         <Row className="justify-content-center">
           { 
             favoriteMovieList?.length !== 0 ?
@@ -91,18 +92,20 @@ export const ProfileView = ({ user, movies, setUser, addFavoriteMovie,removeFavo
                     removeFavoriteMovie={removeFavoriteMovie}
                   />
               </Col> 
-            )):<Col><p>There are no favorite movies</p></Col>  
+            )):<Col className="text-center mb-5"><p>There are no favorite movies</p></Col>  
           }
         </Row>
       </Row>
       <Row className="prof-form">
         <Col md={6}>
           <h2 className="current-profile">My profile</h2>
-          <div>
-            <p>Username: {user.Username}</p>
-            <p>Email: {user.Email}</p>
-            <p>Birthday: {moment(user.Birthday).utc().format("YYYY-MM-DD")}</p>
-          </div>
+          <Card className="mt-3 mb-5" style={{ width: "90%" }}>
+            <ListGroup variant="flush">
+              <ListGroup.Item><PersonCircle className="m-1" />Username: {user.Username}</ListGroup.Item>
+              <ListGroup.Item><Envelope className="m-1" />Email: {user.Email}</ListGroup.Item>
+              <ListGroup.Item><Calendar className="m-1" />Birthday: {moment(user.Birthday).utc().format("YYYY-MM-DD")}</ListGroup.Item>
+            </ListGroup>
+          </Card>
         </Col>
         <Col>  
           <h2 className="profile-title">Update information</h2>
