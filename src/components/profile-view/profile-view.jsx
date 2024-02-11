@@ -28,9 +28,6 @@ export const ProfileView = ({ user, movies, setUser, addFavoriteMovie,removeFavo
       Birthday: birthday
     };
 
-    console.log(JSON.stringify(data));
-    console.log(username);
-
     fetch(`https://movies-flix-app-bb16fed0a4c0.herokuapp.com/users/${user.Username}`, {
       method: "PUT",
       body: JSON.stringify(data),
