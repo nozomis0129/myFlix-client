@@ -10,9 +10,9 @@ export const MovieCard = ({ movie, addFavoriteMovie, removeFavoriteMovie, isFavo
     <Card className="h-100">
        <div>
           {isFavorite ? (
-            <HeartFill size={30} className="fav-button mt-2 me-2 top-0 end-0" onClick={() => removeFavoriteMovie(movie.id)}/>
+            <HeartFill size={30} className="fav-button m-2" onClick={() => removeFavoriteMovie(movie.id)}/>
           ) : (
-            <Heart size={30} className="fav-button mt-2 me-2 top-0 end-0" onClick={() => addFavoriteMovie(movie.id)}/>
+            <Heart size={30} className="fav-button m-2" onClick={() => addFavoriteMovie(movie.id)}/>
           )}
         </div>
       <Card.Img variant="top" src={movie.image} />
