@@ -8,7 +8,6 @@ export const MovieView = ({ movies, removeFavoriteMovie, addFavoriteMovie }) => 
   const { movieId } = useParams();
   const movie = movies.find((movie) => movie.id === movieId);
   const user = JSON.parse(localStorage.getItem("user"));
-  //const FavoriteMovies = {user.FavoriteMovies};
   const selectedMovie = movies.find((movie) => movie.id === movieId);
   const similarMovies = movies.filter((movie) => {
     return movie.id !== movieId && movie.genre.name === selectedMovie.genre.name;
@@ -35,7 +34,7 @@ export const MovieView = ({ movies, removeFavoriteMovie, addFavoriteMovie }) => 
         
           <div>
           {user.FavoriteMovies.includes(movie.id) ? (
-            <Button className="fav-btn" onClick={() =>removeFavoriteMovie(movie.id)}>Remove from favorite</Button>
+            <Button className="fav-btn" onClick={() =>removeFavoriteMovie(movie.id)}>Remove from Favorite</Button>
           ) : (
             <Button className="fav-btn" onClick={() => addFavoriteMovie(movie.id)}>Add to Favorite</Button>
           )}
