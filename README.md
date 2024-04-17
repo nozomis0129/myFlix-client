@@ -37,4 +37,18 @@ Additionally, the users can register their favorite movie to the list.
 - Allows users to remove a movie from their list of favorites
 - Allows existing users to deregister
 
+## References
+
+The myFlix-client application is built by using the following technologies and tools.
+
+- React: A JavaScript library for building user interfaces.
+- Parcel: A web application bundler.
+- npm: The package manager for JavaScript.
+- PropType: Used to document the intended types of properties passed to components.
+- Node.js: A JavaScript runtime built on Chrome's V8 JavaScript engine.
+- Express: Node.js web application framework.
+- MongoDB: A source-available cross-platform document-oriented database program.
+- Bootstrap: Front-end open source toolkit.
+- Render: A unified platform to build and run all your apps and websites with free SSL, a global CDN, private networks and auto deploys from Git.
+
 ## Link to live site: (https://my-flix-1234.netlify.app)
